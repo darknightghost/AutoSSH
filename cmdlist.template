@@ -1,0 +1,14 @@
+host = 
+usrname = 
+passwd =
+port = 
+encoding = 
+
+prompt = 
+
+#((command1, prompt1),
+#   (command2, prompt2),
+#   (command3, prompt3),
+#   ...
+#   (command4, prompt4))
+commands = ()
