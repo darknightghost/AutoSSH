@@ -99,12 +99,15 @@ def main(argv):
     
     #Execute commands
     for c in commands:
-        ssh_send(channel, c[0].strip() + "\n")
+        ssh_send(channel, c[0])
         while True:
-            data, result = ssh_recv(channel, c[1])
-            sys.stdout.write(data.decode(encoding))
-            if result:
-                break
+            try:
+                data, result = ssh_recv(channel, c[1])
+                sys.stdout.write(data.decode(encoding))
+                if result:
+                    break
+            except KeyboardInterrupt:
+                ssh_send(channel, "\x03")
 
     channel.close()
     client.close()
@@ -146,4 +149,5 @@ def ssh_recv(channel, prompt, encoding = "utf-8"):
     return data, prompt_tested
 
 ret = main(sys.argv)
+print("")
 exit(ret)
